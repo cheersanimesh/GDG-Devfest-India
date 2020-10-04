@@ -5,35 +5,25 @@ import 'package:event_app/Screens/Chapters.dart';
 import 'package:event_app/Screens/FAQ.dart';
 import 'package:event_app/Screens/HomeScreen.dart';
 import 'package:event_app/Screens/Speakers_Screen.dart';
+import 'package:event_app/ThemeBloc/AppTheme.dart';
+import 'package:event_app/ThemeBloc/Bloc.dart';
+import 'package:event_app/ThemeBloc/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Tools.dart';
 //import 'package:share/share.dart';
 
 class CustomScaffold extends StatefulWidget {
- /* final String appTitle;
-  final Icon customIcon;
-  final Widget customBody;
-  final Widget tabBar;
-  final Widget popButton;
-
-  CustomScaffold(
-      {@required this.appTitle,
-      @required this.customIcon,
-      @required this.customBody,
-      this.tabBar,
-      this.popButton});*/
-
   @override
   _CustomScaffoldState createState() => _CustomScaffoldState();
 }
 
 class _CustomScaffoldState extends State<CustomScaffold> {
- // bool _isThemeSwitch = false;
-  // int indexBottom=2;
   int _currentIndex = 2;
 
   List<Widget> _screens = <Widget>[
@@ -49,7 +39,6 @@ class _CustomScaffoldState extends State<CustomScaffold> {
       _currentIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     Future<bool> _willPopCallback() async {
@@ -58,45 +47,6 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     }
     return SafeArea(
       child: Scaffold(
-         /* appBar: AppBar(
-            leading: widget.popButton != null ? widget.popButton : null,
-            bottom: widget.tabBar != null ? widget.tabBar : null,
-            title: Text(
-              widget.appTitle,
-              style: TextStyle(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : Colors.black,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-            actions: <Widget>[
-              IconButton(
-                icon: _isThemeSwitch
-                    ? Icon(FontAwesomeIcons.sun)
-                    : Icon(FontAwesomeIcons.moon),
-                onPressed: () {
-                  _isThemeSwitch = _isThemeSwitch ? false : true;
-                  setState(() {
-                    if (_isThemeSwitch) {
-                      BlocProvider.of<ThemeBloc>(context)
-                          .dispatch(ThemeEvent(theme: Themes.DarkTheme));
-                    } else {
-                      BlocProvider.of<ThemeBloc>(context)
-                          .dispatch(ThemeEvent(theme: Themes.LightTheme));
-                    }
-                  });
-                },
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () => Share.share(
-                      "Download the new GDG DevFest India App and share with your tech friends.\nPlayStore -  "))
-            ],
-          ),*/
           body: _screens.elementAt(_currentIndex),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -123,3 +73,4 @@ class _CustomScaffoldState extends State<CustomScaffold> {
     );
   }
 }
+
